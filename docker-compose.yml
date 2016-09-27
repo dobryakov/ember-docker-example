@@ -1,0 +1,18 @@
+# Run as:
+# USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose up
+
+version: '2'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        uid: "${USER_ID}"
+        gid: "${GROUP_ID}"
+    image: local/ember_image:dev
+    volumes:
+      - ./ember-app:/home/app/ember-app
+    ports:
+      - "4200:4200"
+      - "49152:49152"
